@@ -1,40 +1,42 @@
 name: 📚 Deploy Documentation
 
+# Trigger this workflow on a push to specific paths
 on:
   push:
     paths:
-      - docs/**
-      - .github/workflows/docs.yml
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
 
 jobs:
+  # Define the deployment job
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
-      - name: 📂 Checkout
+      - name: 📂 Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Fetch all history for all tags and branches
 
-      - name: 🔵 Setup NodeJS
+      - name: 🔵 Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: yarn
-          cache-dependency-path: ./docs/yarn.lock
+          node-version: '16'  # Set the Node.js version
+          cache: 'yarn'  # Cache Yarn dependencies
+          cache-dependency-path: './docs/yarn.lock'
 
       - name: ⏬ Install Dependencies
         run: yarn install --frozen-lockfile
-        working-directory: docs
+        working-directory: docs  # Specify the working directory
 
-      - name: 🏗 Build
+      - name: 🏗 Build Documentation
         run: yarn build
-        working-directory: docs
+        working-directory: docs  # Specify the working directory
 
-      - name: 🚀 Deploy
+      - name: 🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build
-          cname: unifi.riddix.de
-        if: github.ref == 'refs/heads/main'
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use a built-in GitHub token for authentication
+          publish_dir: './docs/build'  # Directory to publish
+          cname: 'unifi.riddix.de'  # Custom domain
+        if: github.ref == 'refs/heads/main'  # Condition to only deploy from the main branch
