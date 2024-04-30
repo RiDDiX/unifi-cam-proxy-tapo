@@ -17,6 +17,10 @@ UniFi Camera Proxy allows the integration of non-Ubiquiti cameras within the Uni
 
 To use a Tapo camera with the UniFi Camera Proxy, you need to configure the proxy with specific parameters. Below is an example command that demonstrates how to set up a Tapo camera:
 
+________________________________________
+unifi-cam-proxy --verbose --model '{MODEL}' --ip "{IP-CAM}" --host {IP-UNVR} --mac '{MAC}' --cert /client.pem --token '{UNVR-TOKEN}' tapo --username="{RTSP-ADMIN}" --password="{RTSP-PASSWORD}" --rtsp 'rtsp://{RTSP-ADMIN}:{RTSP-PASSWORD}@{IP-CAM}:554' --ffmpeg-args='-c:a copy -c:v copy -bsf:v "h264_metadata=tick_rate=15000/1001"'
+________________________________________
+
 ```bash
 unifi-cam-proxy --verbose --model '{MODEL}' --ip "{IP-CAM}" --host {IP-UNVR} --mac '{MAC}' --cert /client.pem --token '{UNVR-TOKEN}' tapo --username="{RTSP-ADMIN}" --password="{RTSP-PASSWORD}" --rtsp 'rtsp://{RTSP-ADMIN}:{RTSP-PASSWORD}@{IP-CAM}:554' --ffmpeg-args='-c:a copy -c:v copy -bsf:v "h264_metadata=tick_rate=15000/1001"'
 
