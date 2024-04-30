@@ -36,5 +36,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/build
-          cname: unifi-cam-proxy.com
+          cname: unifi.riddix.de
         if: github.ref == 'refs/heads/main'
