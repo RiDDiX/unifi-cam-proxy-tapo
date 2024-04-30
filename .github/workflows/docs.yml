@@ -21,7 +21,7 @@ jobs:
       - name: 🔵 Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Set the Node.js version
+          node-version: '20'  # Set the Node.js version to 20
           cache: 'yarn'  # Cache Yarn dependencies
           cache-dependency-path: './docs/yarn.lock'
 
